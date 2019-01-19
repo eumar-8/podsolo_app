@@ -36,22 +36,14 @@ export default class PodcastItem extends React.Component {
   componentDidMount = () => {
     const { navigation } = this.props;
     const data = navigation.getParam("data", {});
-    this.setState({ data }, () => {
-      console.log("***************", data);
-    });
-    //console.log("***************", data);
+    this.setState({ data });
     getEpisodes(data.id).then(episodes => {
-      this.setState({ episodes }, () => {
-        console.log("#######################", this.state.episodes[0]);
-      });
+      this.setState({ episodes });
     });
   };
 
   renderContent = () => {
     const { navigation } = this.props;
-    // if (this.state.episodes !== false) {
-    //   audio(this.state.episodes.enclousures[0].url);
-    // }
 
     return (
       <View>
@@ -62,8 +54,9 @@ export default class PodcastItem extends React.Component {
           {this.state.episodes &&
             this.state.episodes.length > 0 &&
             this.renderEpisodeList()}
-          <AudioCard episode={this.state.episodePlaying} />
-          {/* </View> */}
+          <AudioCard
+            episode={this.state.episodePlaying || this.state.episodes[0]}
+          />
         </LinearGradient>
       </View>
     );

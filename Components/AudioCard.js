@@ -1,5 +1,4 @@
 import React from "react";
-import SeekBar from "./ SeekBar";
 import {
   View,
   Text,
@@ -7,26 +6,50 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
-  Dimensions
+  ActivityIndicator,
+  Slider
 } from "react-native";
 import Video from "react-native-video";
+import { formatTime } from "../utils";
 
 export default class AudioCard extends React.Component {
   state = {
     paused: true,
-    duration: null
+    duration: undefined,
+    currentTime: undefined
   };
 
   player = null;
 
-  setDuration = duration => {
-    console.log(duration);
-    this.setState({ duration });
+  setDuration = data => {
+    this.setState({ duration: data.duration });
   };
-  setTime = () => {};
+
+  setTime = data => {
+    this.setState({ currentTime: data.currentTime });
+  };
+
+  onSlide = time => {
+    this.setState({ paused: true, currentTime: time });
+    // console.log("onslide");
+  };
+
+  onSlideComplete = time => {
+    this.player.seek(time);
+    this.setState({ paused: false });
+  };
+
+  componentWillUpdate = nextProps => {
+    if (this.props.episode && nextProps.episode !== this.props.episode) {
+      this.setState({
+        paused: false,
+        duration: undefined,
+        currentTime: undefined
+      });
+    }
+  };
 
   render() {
-    //console.log(this.state.topPodcasts);
     return (
       <View style={styles.container}>
         {this.props.episode &&
@@ -38,8 +61,8 @@ export default class AudioCard extends React.Component {
                 this.player = ref;
               }}
               paused={this.state.paused} // Pauses playback entirely.
-              onLoad={this.setDuration.bind(this)} // Callback when video loads
-              onProgress={this.setTime.bind(this)} // Callback every ~250ms with currentTime
+              onLoad={this.setDuration} // Callback when video loads
+              onProgress={this.setTime} // Callback every ~250ms with currentTime
               style={{}}
             />
           )}
@@ -63,11 +86,23 @@ export default class AudioCard extends React.Component {
           {this.props.episode && (
             <Text style={styles.title}>{this.props.episode.title}</Text>
           )}
-          <View>
-            <SeekBar />
+          <View style={{ width: "100%", marginHorizontal: 20 }}>
+            <Slider
+              onSlidingComplete={this.onSlideComplete}
+              maximumValue={this.state.duration}
+              value={this.state.currentTime}
+              onValueChange={this.onSlide}
+            />
           </View>
-
-          {/* <Text style={styles.artist}>{this.state.duration}</Text> */}
+          {this.state.duration && !this.state.currentTime && (
+            <Text style={styles.artist}>{formatTime(this.state.duration)}</Text>
+          )}
+          {!!this.state.currentTime && (
+            <Text style={styles.artist}>
+              {formatTime(this.state.currentTime)}
+            </Text>
+          )}
+          {!this.state.duration && <ActivityIndicator />}
         </View>
         <TouchableOpacity>
           <View style={styles.moreButton}>
