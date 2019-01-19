@@ -1,15 +1,37 @@
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { getEpisodes, audio } from "../api";
+import { getEpisodes } from "../api";
+import AudioCard from "../Components/AudioCard";
 
 export default class PodcastItem extends React.Component {
   state = {
     episodes: false
   };
+
+  data = () => {
+    const { navigation } = this.props;
+    const data = navigation.getParam("data", {});
+    return data;
+  };
+  static navigationOptions = ({ navigation }) => {
+    const data = navigation.getParam("data", { artistName: "" });
+    return {
+      title: data.artistName,
+      headerStyle: {
+        backgroundColor: "#30343f"
+      },
+      headerTintColor: "#fff"
+    };
+  };
+
   componentDidMount = () => {
     const { navigation } = this.props;
     const data = navigation.getParam("data", {});
+    this.setState({ data }, () => {
+      console.log("***************", data);
+    });
+    //console.log("***************", data);
     getEpisodes(data.id, 12).then(episodes => {
       this.setState({ episodes }, () => {
         console.log("#######################", this.state.episodes[0]);
@@ -37,10 +59,11 @@ export default class PodcastItem extends React.Component {
           <View style={styles.infoContainer}>
             <Text style={styles.infoName}>{data.name}</Text>
 
-            <Text style={styles.infoArtistName}>{data.artistName}</Text>
             <Text style={styles.infoEpisodes}>12 Episodes</Text>
           </View>
-          <View style={styles.playContainer} />
+          {/* <View style={styles.playContainer}> */}
+          <AudioCard />
+          {/* </View> */}
         </LinearGradient>
       </View>
     );
@@ -61,7 +84,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   imageContainer: {
-    height: 192
+    height: 192,
+    marginTop: 20,
+    borderRadius: 4,
+    overflow: "hidden"
   },
   infoContainer: {
     justifyContent: "center",
@@ -92,4 +118,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: "#ffff99"
   }
+  // playContainer: {
+  //   flex: 1,
+  //   flexDirection: "row"
+  // }
 });

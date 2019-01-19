@@ -29,7 +29,8 @@ export default class HomeScreen extends React.Component {
       <View style={styles.header}>
         <Navbar />
       </View>
-    )
+    ),
+    headerBackTitle: null
   };
 
   onCountryChange = country => {

@@ -7,7 +7,6 @@ class PodcastCard extends React.Component {
   onPress = () => {
     const navigation = this.props.navigation;
     const { data } = this.props;
-    //console.log("******************************", data);
     navigation.navigate("PodcastDetails", { data });
   };
   render() {
@@ -24,7 +23,13 @@ class PodcastCard extends React.Component {
             />
           </View>
           <View style={styles.infoContainer}>
-            <Text>{data.name}</Text>
+            <Text
+              style={styles.infoText}
+              ellipsizeMode="tail"
+              numberOfLines={2}
+            >
+              {data.name}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -45,12 +50,17 @@ const styles = StyleSheet.create({
     height: 180
   },
   infoContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 88,
-    backgroundColor: "#437883"
+    paddingVertical: 10,
+    paddingHorizontal: 1,
+    //justifyContent: "center",
+    //alignItems: "center",
+    height: 88
+    //backgroundColor: "#437883"
+  },
+  infoText: {
+    color: "floralwhite",
+    fontSize: 16,
+    fontWeight: "300"
   }
 });
 

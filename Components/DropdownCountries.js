@@ -36,27 +36,46 @@ export default class DropdownCountries extends React.Component {
     let data = objData;
 
     return (
-      <Dropdown
-        pickerStyle={{
-          marginTop: 30
-        }}
-        data={data}
-        value={this.state.selectedCountry}
-        onChangeText={this.onChange}
-      />
+      <View style={styles.container}>
+        <View style={styles.ContainerDropdown}>
+          <Dropdown
+            style={styles.menuContent}
+            label="Country"
+            data={data}
+            value={this.state.selectedCountry}
+            onChangeText={this.onChange}
+            baseColor={"#30343f"}
+            animationDuration={300}
+            dropdownPosition={0}
+            dropdownOffset={{ top: 30, left: 10 }}
+            pickerStyle={{
+              marginTop: 47,
+              borderRadius: 5
+            }}
+          />
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  headerText: {
-    fontSize: 20,
-    margin: 10,
-    fontWeight: "bold"
+  container: {
+    display: "flex",
+    alignContent: "center",
+    alignItems: "center",
+
+    marginBottom: 20
+  },
+  ContainerDropdown: {
+    marginHorizontal: 10,
+    marginVertical: 10,
+    paddingHorizontal: 20,
+    width: 200
   },
   menuContent: {
+    //flex: 1,
     color: "#000",
-    fontWeight: "bold",
     padding: 2,
     fontSize: 20
   }
