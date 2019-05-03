@@ -54,7 +54,6 @@ export default class AudioCard extends React.Component {
     return (
 
         <LinearGradient
-            //start={{x: 0.25, y: 0.25}} end={{x: 0.5, y: 1.0}}
             colors={[  "#30343f", "#3a6186"]}
             style={styles.container}
         >

@@ -75,7 +75,7 @@ export default class PodcastItemScreen extends React.Component {
           />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoName}>{data.name}</Text>
+          <Text  style={styles.infoName}>{data.name}</Text>
           {this.state.episodes && this.state.episodes.length > 0 && (
             <Text style={styles.infoEpisodes}>{`${
               this.state.episodes.length

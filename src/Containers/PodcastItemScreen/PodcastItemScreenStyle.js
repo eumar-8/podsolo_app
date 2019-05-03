@@ -2,13 +2,15 @@ import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+
     },
     imageContainer: {
         height: 192,
-        marginTop: 20,
+        marginTop: 15,
         borderRadius: 4,
-        overflow: "hidden"
+        overflow: "hidden",
+
     },
     infoContainer: {
         justifyContent: "center",
@@ -37,12 +39,10 @@ const styles = StyleSheet.create({
     },
     infoEpisodes: {
         fontSize: 17,
-        color: "#ffff99"
+        color: "#ffff99",
+        marginBottom:20
     }
-    // playContainer: {
-    //   flex: 1,
-    //   flexDirection: "row"
-    // }
+
 });
 
 
