@@ -1,6 +1,6 @@
 import React from "react";
-import HomeScreen from "./Containers/HomeScreen";
-import PodcastItem from "./Containers/PodcastItem";
+import HomeScreen from "./src/Containers/HomeScreen";
+import PodcastItem from "./src/Containers/PodcastItem";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 const RootStack = createStackNavigator(

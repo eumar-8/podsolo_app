@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import {  View} from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
-import { getCountries } from "../api";
+import { getCountries } from "../../api";
+import styles from "./DropdownCountrieStyle"
 
 export default class DropdownCountries extends React.Component {
   state = {
@@ -59,24 +60,3 @@ export default class DropdownCountries extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    alignContent: "center",
-    alignItems: "center",
-
-    marginBottom: 20
-  },
-  ContainerDropdown: {
-    marginHorizontal: 10,
-    marginVertical: 10,
-    paddingHorizontal: 20,
-    width: 200
-  },
-  menuContent: {
-    //flex: 1,
-    color: "#000",
-    padding: 2,
-    fontSize: 20
-  }
-});

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { getEpisodes } from "../api";
-import AudioCard from "../Components/AudioCard";
+import { AudioCard } from "../Components";
 
 export default class PodcastItem extends React.Component {
   state = {

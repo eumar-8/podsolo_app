@@ -1,10 +1,10 @@
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
-import { StyleSheet, Text, View, ScrollView, Picker } from "react-native";
-import Navbar from "../Components/NavBar";
-import DropdownCountries from "../Components/DropdownCountries";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { DropdownCountries, Navbar, PodcastCard } from "../Components";
+
 import { getTopPodcastsForCountry } from "../api";
-import PodcastCard from "../Components/PodcastCard";
+
 
 const styles = StyleSheet.create({
   header: {
