@@ -10,6 +10,7 @@ import {
 import styles from "./AudioCardStyle"
 import Video from "react-native-video";
 import { formatTime } from "../../utils";
+import LinearGradient from "react-native-linear-gradient";
 
 
 export default class AudioCard extends React.Component {
@@ -51,7 +52,12 @@ export default class AudioCard extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+
+        <LinearGradient
+            //start={{x: 0.25, y: 0.25}} end={{x: 0.5, y: 1.0}}
+            colors={[  "#30343f", "#3a6186"]}
+            style={styles.container}
+        >
         {this.props.episode &&
           this.props.episode.enclosures[0] &&
           this.props.episode.enclosures[0].url && (
@@ -84,7 +90,8 @@ export default class AudioCard extends React.Component {
         </TouchableOpacity>
         <View style={styles.detailsWrapper}>
           {this.props.episode && (
-            <Text style={styles.title}>{this.props.episode.title}</Text>
+              <View style={{ width: "100%", marginHorizontal: 20}}><Text numberOfLines={1} style={styles.title}>{this.props.episode.title}</Text></View>
+
           )}
           <View style={{ width: "100%", marginHorizontal: 20 }}>
             <Slider
@@ -112,7 +119,8 @@ export default class AudioCard extends React.Component {
             />
           </View>
         </TouchableOpacity>
-      </View>
+        </LinearGradient>
+
     );
   }
 }

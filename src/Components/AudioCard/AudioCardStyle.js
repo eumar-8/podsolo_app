@@ -5,24 +5,30 @@ import { StyleSheet} from "react-native";
         position: "absolute",
         bottom: 0,
         flexDirection: "row",
-        paddingLeft: 20,
+        paddingLeft: 15,
         alignItems: "center",
-        paddingRight: 20,
+        paddingRight: 15,
         paddingBottom: 20,
-        backgroundColor: "rgba(0, 0, 0, 0.3)",
-        height: 100,
+        //backgroundColor: "#3A6186", //"rgba(0, 0, 0, 0.5)",
+        height: "21%",
         width: "100%"
     },
     detailsWrapper: {
         justifyContent: "center",
         alignItems: "center",
-        flex: 1
+        flex: 1,
+        //paddingTop: 40
+        //paddingTop: 40
+
+
     },
     title: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
+
+
     },
     artist: {
         color: "rgba(255, 255, 255, 0.72)",
