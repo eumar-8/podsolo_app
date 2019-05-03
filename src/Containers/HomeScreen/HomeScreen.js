@@ -1,25 +1,13 @@
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { DropdownCountries, Navbar, PodcastCard } from "../Components";
+import {  View, ScrollView } from "react-native";
+import { DropdownCountries, Navbar, PodcastCard } from "../../Components";
+import styles from "./HomeScreenStyle"
 
-import { getTopPodcastsForCountry } from "../api";
+import { getTopPodcastsForCountry } from "../../api";
 
 
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#e1e8ee"
-  },
-  wrapper: {
-    flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "flex-start" // if you want to fill rows left to right
-  },
-  item: {
-    width: "50%" // is 50% of container width
-  }
-});
+
 export default class HomeScreen extends React.Component {
   state = {
     topPodcasts: []

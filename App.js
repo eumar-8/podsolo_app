@@ -1,12 +1,11 @@
 import React from "react";
-import HomeScreen from "./src/Containers/HomeScreen";
-import PodcastItem from "./src/Containers/PodcastItem";
+import { HomeScreen, PodcastItemScreen }from "./src/Containers";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    PodcastDetails: PodcastItem
+    PodcastDetails: PodcastItemScreen
   },
   {
     initialRouteName: "Home"

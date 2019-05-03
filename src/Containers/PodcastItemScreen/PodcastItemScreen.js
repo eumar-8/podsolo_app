@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  StyleSheet,
+
   View,
   Image,
   Text,
@@ -8,10 +8,11 @@ import {
   TouchableOpacity
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { getEpisodes } from "../api";
-import { AudioCard } from "../Components";
+import { getEpisodes } from "../../api";
+import { AudioCard } from "../../Components";
+import styles from "./PodcastItemScreenStyle"
 
-export default class PodcastItem extends React.Component {
+export default class PodcastItemScreen extends React.Component {
   state = {
     episodes: false,
     episodePlaying: null
@@ -132,47 +133,3 @@ export default class PodcastItem extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  imageContainer: {
-    height: 192,
-    marginTop: 20,
-    borderRadius: 4,
-    overflow: "hidden"
-  },
-  infoContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 88
-  },
-  playContainer: {
-    height: 100
-  },
-  infoName: {
-    marginTop: 20,
-    marginBottom: 10,
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "white",
-    textShadowColor: "rgba(0, 0, 0, 0.75)",
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10
-  },
-  infoArtistName: {
-    color: "#ffffff",
-    marginBottom: 10,
-    fontSize: 17,
-    fontWeight: "bold"
-  },
-  infoEpisodes: {
-    fontSize: 17,
-    color: "#ffff99"
-  }
-  // playContainer: {
-  //   flex: 1,
-  //   flexDirection: "row"
-  // }
-});
