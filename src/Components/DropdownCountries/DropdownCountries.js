@@ -1,38 +1,34 @@
 import React from "react";
-import {  View} from "react-native";
+import {View} from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
-import { getCountries } from "../../api";
-import styles from "./DropdownCountrieStyle"
+import styles from "./DropdownCountrieStyle";
 
-export default class DropdownCountries extends React.Component {
-  state = {
-    countries: [],
-    selectedCountry: ""
-  };
+ export default class DropdownCountries extends React.Component {
+
 
   componentDidMount() {
-    getCountries().then(countries => {
-      this.setState({ countries, selectedCountry: countries[0].name });
-      if (typeof this.props.onChange === "function") {
-        this.props.onChange(countries[0].code);
-      }
-    });
+    this.props.getCountries()
+    this.props.getTopPodcastForCountry()
+
   }
 
-  onChange = countryName => {
-    const countryItem = this.state.countries.find(
-      country => country.name === countryName
+  onChangeHandler = value => {
+   const countryCode = this.props.countries.find(
+        country => country.name === value
     );
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(countryItem.code);
-    }
+    this.props.getTopPodcastForCountry(countryCode.code)
+
+
   };
+
+
 
   render() {
     let objData = [];
-    let { countries } = this.state;
-    countries.map(el => {
-      objData.push({ value: el.name });
+    let { countries } = this.props;
+    console.log(countries)
+    countries && countries.map(el => {
+        objData.push({ value: el.name });
     });
     let data = objData;
 
@@ -43,8 +39,8 @@ export default class DropdownCountries extends React.Component {
             style={styles.menuContent}
             label="Country"
             data={data}
-            value={this.state.selectedCountry}
-            onChangeText={this.onChange}
+            value={this.props.selectedCountry}
+            onChangeText={value => this.onChangeHandler(value)}
             baseColor={"#30343f"}
             animationDuration={300}
             dropdownPosition={0}

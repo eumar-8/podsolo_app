@@ -1,6 +1,5 @@
 import React from "react";
 import {
-
   View,
   Image,
   Text,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { getEpisodes } from "../../api";
+import { getEpisodes } from "../../api/api";
 import { AudioCard } from "../../Components";
 import styles from "./PodcastItemScreenStyle"
 
@@ -23,6 +22,7 @@ export default class PodcastItemScreen extends React.Component {
     const data = navigation.getParam("data", {});
     return data;
   };
+
   static navigationOptions = ({ navigation }) => {
     const data = navigation.getParam("data", { artistName: "" });
     return {

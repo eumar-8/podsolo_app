@@ -4,14 +4,13 @@ import {  View, ScrollView } from "react-native";
 import { DropdownCountries, Navbar, PodcastCard } from "../../Components";
 import styles from "./HomeScreenStyle"
 
-import { getTopPodcastsForCountry } from "../../api";
+import { getCountries, selectCountry} from "../../Ducks/app"
+import { getTopPodcastForCountry} from "../../Ducks/podcast"
 
+import {connect} from "react-redux";
 
+class HomeScreen extends React.Component {
 
-export default class HomeScreen extends React.Component {
-  state = {
-    topPodcasts: []
-  };
   static navigationOptions = {
     header: (
       <View style={styles.header}>
@@ -21,14 +20,8 @@ export default class HomeScreen extends React.Component {
     headerBackTitle: null
   };
 
-  onCountryChange = country => {
-    getTopPodcastsForCountry(country).then(topPodcasts => {
-      this.setState({ topPodcasts });
-    });
-  };
 
   render() {
-    //console.log(this.state.topPodcasts);
     return (
       <View
         style={{
@@ -42,11 +35,17 @@ export default class HomeScreen extends React.Component {
           style={{ flex: 1, width: "100%" }}
         >
           <View>
-            <DropdownCountries onChange={this.onCountryChange} />
+            <DropdownCountries
+                countries={this.props.countries}
+                getTopPodcastForCountry={this.props.getTopPodcastForCountry}
+                getCountries={ this.props.getCountries}
+                selectedCountry={this.props.selectedCountry}
+                onChange={this.onCountryChange}
+            />
 
             <ScrollView>
               <View style={styles.wrapper}>
-                {this.state.topPodcasts.map((podcast, i) => (
+                {this.props.topPodcasts && this.props.topPodcasts.map((podcast, i) => (
                   <View key={i} style={styles.item}>
                     <PodcastCard data={podcast} />
                   </View>
@@ -59,3 +58,19 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  topPodcasts: state.podcast.topPodcasts,
+  selectedCountry:state.app.selectedCountry,
+  countries: state.app.countries
+});
+
+const mapDispatchToProps = dispatch => ({
+  getTopPodcastForCountry:(country)=> dispatch(getTopPodcastForCountry(country)),
+  getCountries:()=> dispatch(getCountries()),
+  selectCountry:(country)=> dispatch(selectCountry(country))
+
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen)
+

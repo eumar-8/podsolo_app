@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: "flex-start" // if you want to fill rows left to right
+        alignItems: "flex-start"
     },
     item: {
         width: "50%" // is 50% of container width
