@@ -5,14 +5,16 @@ import styles from "./PodcastCardStyle"
 import { withNavigation } from "react-navigation";
 
 class PodcastCard extends React.Component {
+
   onPress = () => {
     const navigation = this.props.navigation;
-    const { data } = this.props;
+    const { data, getEpisodes } = this.props;
+    getEpisodes(data.id)
     navigation.navigate("PodcastDetails", { data });
   };
+
   render() {
     const { data } = this.props;
-
     return (
       <TouchableOpacity onPress={this.onPress}>
         <View style={styles.container}>

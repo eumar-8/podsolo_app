@@ -5,7 +5,7 @@ import { DropdownCountries, Navbar, PodcastCard } from "../../Components";
 import styles from "./HomeScreenStyle"
 
 import { getCountries, selectCountry} from "../../Ducks/app"
-import { getTopPodcastForCountry} from "../../Ducks/podcast"
+import {getEpisodes, getTopPodcastForCountry} from "../../Ducks/podcast"
 
 import {connect} from "react-redux";
 
@@ -47,7 +47,10 @@ class HomeScreen extends React.Component {
               <View style={styles.wrapper}>
                 {this.props.topPodcasts && this.props.topPodcasts.map((podcast, i) => (
                   <View key={i} style={styles.item}>
-                    <PodcastCard data={podcast} />
+                    <PodcastCard
+                        episodes={this.props.episodes}
+                        getEpisodes = {this.props.getEpisodes}
+                        data={podcast} />
                   </View>
                 ))}
               </View>
@@ -62,12 +65,15 @@ class HomeScreen extends React.Component {
 const mapStateToProps = state => ({
   topPodcasts: state.podcast.topPodcasts,
   selectedCountry:state.app.selectedCountry,
-  countries: state.app.countries
+  countries: state.app.countries,
+  episodes:state.podcast.episodes
+
 });
 
 const mapDispatchToProps = dispatch => ({
   getTopPodcastForCountry:(country)=> dispatch(getTopPodcastForCountry(country)),
   getCountries:()=> dispatch(getCountries()),
+  getEpisodes: (podcastId)=> dispatch(getEpisodes(podcastId)),
   selectCountry:(country)=> dispatch(selectCountry(country))
 
 })

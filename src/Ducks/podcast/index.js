@@ -2,10 +2,12 @@ import api from "../../api"
 
 //Actions
 const GET_PODCAST_FOR_COUNTRY = "GET_PODCAST_FOR_COUNTRY"
+const GET_EPISODES= "GET_EPISODES"
 
 //Initial State
 const initialState ={
-    topPodcasts:[]
+    topPodcasts:[],
+    episodes:[]
 }
 
 //Reducer
@@ -19,6 +21,11 @@ export default function podcastReducer(state = initialState, action = {}) {
                 topPodcasts: action.payload
 
             }
+        case GET_EPISODES:
+                return {
+                ...state,
+                    episodes: action.payload
+                }
 
         default:
             return state
@@ -41,6 +48,21 @@ export const  getTopPodcastForCountry = (country = "us")=>{
         } catch (err) {
             console.log(err)
             console.log("CAN'T  GET PODCAST")
+        }
+    }
+}
+
+export const getEpisodes = (podcastId)=>{
+    return async dispatch =>{
+        try {
+            const episodes = await api.getEpisodes(podcastId);
+            dispatch({
+                type: GET_EPISODES,
+                payload: episodes
+            })
+        }catch (e) {
+            console.log(e)
+            console.log("CAN'T  GET EPISODES")
         }
     }
 }
