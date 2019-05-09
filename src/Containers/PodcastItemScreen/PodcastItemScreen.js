@@ -18,7 +18,6 @@ import {connect} from "react-redux";
     episodePlaying: null
   };
 
-
   static navigationOptions = ({ navigation }) => {
     const data = navigation.getParam("data", { artistName: "" });
     return {
@@ -30,12 +29,8 @@ import {connect} from "react-redux";
     };
   };
 
-
-
   renderContent = () => {
-    const { navigation } = this.props;
-
-    return (
+      return (
       <View>
         <LinearGradient
           colors={["#3a6186", "#89253e"]}
@@ -53,7 +48,7 @@ import {connect} from "react-redux";
   };
 
   renderPodcastTitle = () => {
-    const data = this.props.navigation.getParam("data", {});
+    const data = this.props.selectedPodcast;
     return (
       <View>
         <View style={styles.imageContainer}>
@@ -123,14 +118,15 @@ import {connect} from "react-redux";
 
 const mapStateToProps = state => ({
     topPodcasts: state.podcast.topPodcasts,
-    episodes:state.podcast.episodes
+    episodes:state.podcast.episodes,
+    selectedPodcast: state.podcast.selectedPodcast
 });
 
 const mapDispatchToProps = dispatch => ({
     getTopPodcastForCountry:(country)=> dispatch(getTopPodcastForCountry(country)),
     getEpisodes: (podcastId)=> dispatch(getEpisodes(podcastId))
 
-})
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(PodcastItemScreen)
 

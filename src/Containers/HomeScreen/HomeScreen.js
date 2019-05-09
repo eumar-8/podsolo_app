@@ -4,8 +4,8 @@ import {  View, ScrollView } from "react-native";
 import { DropdownCountries, Navbar, PodcastCard } from "../../Components";
 import styles from "./HomeScreenStyle"
 
-import { getCountries, selectCountry} from "../../Ducks/app"
-import {getEpisodes, getTopPodcastForCountry} from "../../Ducks/podcast"
+import { getCountries } from "../../Ducks/app"
+import {getEpisodes, getTopPodcastForCountry,getDataSelectedPodcast} from "../../Ducks/podcast"
 
 import {connect} from "react-redux";
 
@@ -46,11 +46,15 @@ class HomeScreen extends React.Component {
             <ScrollView>
               <View style={styles.wrapper}>
                 {this.props.topPodcasts && this.props.topPodcasts.map((podcast, i) => (
+
                   <View key={i} style={styles.item}>
                     <PodcastCard
                         episodes={this.props.episodes}
                         getEpisodes = {this.props.getEpisodes}
-                        data={podcast} />
+                        data={podcast}
+                        getDataSelectedPodcast={this.props.getDataSelectedPodcast}
+                        selectedPodcast={this.props.selectedPodcast}
+                    />
                   </View>
                 ))}
               </View>
@@ -66,7 +70,8 @@ const mapStateToProps = state => ({
   topPodcasts: state.podcast.topPodcasts,
   selectedCountry:state.app.selectedCountry,
   countries: state.app.countries,
-  episodes:state.podcast.episodes
+  episodes:state.podcast.episodes,
+  selectedPodcast:state.podcast.selectedPodcast
 
 });
 
@@ -74,9 +79,8 @@ const mapDispatchToProps = dispatch => ({
   getTopPodcastForCountry:(country)=> dispatch(getTopPodcastForCountry(country)),
   getCountries:()=> dispatch(getCountries()),
   getEpisodes: (podcastId)=> dispatch(getEpisodes(podcastId)),
-  selectCountry:(country)=> dispatch(selectCountry(country))
-
-})
+  getDataSelectedPodcast:(data)=>dispatch(getDataSelectedPodcast(data))
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen)
 

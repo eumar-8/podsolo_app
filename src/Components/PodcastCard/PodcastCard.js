@@ -8,8 +8,9 @@ class PodcastCard extends React.Component {
 
   onPress = () => {
     const navigation = this.props.navigation;
-    const { data, getEpisodes } = this.props;
-    getEpisodes(data.id)
+    const { data, getEpisodes, getDataSelectedPodcast } = this.props;
+    getDataSelectedPodcast(data);
+    getEpisodes(data.id);
     navigation.navigate("PodcastDetails", { data });
   };
 
